@@ -1,0 +1,58 @@
+import { Component, OnInit } from '@angular/core';
+import { HistoryService } from './history.service';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent implements OnInit {
+  public history: [];
+  public events: [];
+  public deaths:[];
+  public births:[]
+  public showEvents: boolean;
+  public showDeaths: boolean;
+  public showBirths: boolean;
+
+  constructor(private historyService: HistoryService) {}
+
+  ngOnInit() {
+    this.showEvents = true;
+    this.todayInHistory();
+  }
+
+  public todayInHistory(): void {
+    this.historyService.getTodayHistory().subscribe(
+      (response: any)=>{
+        console.log(response);
+        this.history = response;
+        this.events = response.data.Events;
+        this.births = response.data.Births;
+        this.deaths = response.data.Deaths;
+        console.log(this.history)
+      },
+      (error: any)=>{
+        console.log(error);
+      },
+    );
+  }
+
+  public displayEvents(): void {
+    this.showEvents = true;
+    this.showBirths = false;
+    this.showDeaths = false;
+  }
+
+  public displayBirths(): void {
+    this.showBirths = true;
+    this.showDeaths = false;
+    this.showEvents = false;
+  }
+
+  public displayDeaths(): void {
+    this.showDeaths = true;
+    this.showEvents = false;
+    this.showBirths = false;
+  }
+}
