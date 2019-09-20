@@ -11,7 +11,7 @@ export class HistoryService {
 
   constructor(private http: HttpClient) {}
 
-  public getTodayHistory(){
+  public getTodayHistory(): Observable<any>{
     return this.http.request<any>('JSONP', this.host, {
       params: new HttpParams().append('callback', 'JSONP_CALLBACK'),
       observe: 'body',

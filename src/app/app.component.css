@@ -3,6 +3,14 @@ body {
     min-height: 75rem;
   }
 
+  p {
+    font-size: 1.4em;
+  }
+
+  a {
+    cursor: pointer;
+  }
+
   .navbar-nav .nav-link,
   .navbar-brand {
     text-align: center;
