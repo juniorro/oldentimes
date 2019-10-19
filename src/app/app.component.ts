@@ -48,11 +48,39 @@ export class AppComponent implements OnInit {
     this.showBirths = true;
     this.showDeaths = false;
     this.showEvents = false;
+    //this.sendEmail();
   }
 
   public displayDeaths(): void {
     this.showDeaths = true;
     this.showEvents = false;
     this.showBirths = false;
+  }
+
+  public sendEmail(): void {
+    let data = {
+      'key': 'cbfed1519feb69cfd84fc2da8214e1e6-us20',
+      'message': {
+        'from_email': 'juniorro98@outlook.com',
+        'to': [
+            {
+              'email': 'juniorro98@outlook.com',
+              'name': 'Roland Junior Toussaint',
+              'type': 'to'
+            }
+          ],
+        'autotext': 'true',
+        'subject': 'YOUR SUBJECT HERE!',
+        'html': 'This is a test bitch'
+      }
+    }
+    this.historyService.sendEmail(data).subscribe(
+      (response: any)=>{
+        console.log(response);
+      },
+      (error: any)=>{
+        console.log(error);
+      }
+    );
   }
 }
